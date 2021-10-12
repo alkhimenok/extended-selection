@@ -1,0 +1,30 @@
+.option {
+  position: relative;
+  width: 100%;
+  padding: 0 20px;
+  .option__label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .option__text {
+    padding: 6px 0;
+    font-size: 14px;
+    line-height: 18px;
+    word-wrap: break-word;
+    color: $dark;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  // .option__checkbox {
+  // }
+  .option__arrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+  }
+  &._selected {
+    background-color: $transparateBlue;
+  }
+}

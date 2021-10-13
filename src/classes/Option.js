@@ -31,7 +31,7 @@ export class Option extends Element { //////////////////////////////////////////
         </fieldset>
       `
 
-    this.renderElement(castomOption, this.parent)
+    this.renderToElement(castomOption, this.parent)
 
     this.$currentOption = this.parent.elements[this.id]
 

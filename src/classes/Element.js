@@ -4,6 +4,7 @@ export class Element extends Utils {
   constructor(selector) {
     super()
     this.selector = selector
+    this.element = this.getDomElement(this.selector, false)
   }
 
   getElement(parent) {
@@ -12,7 +13,8 @@ export class Element extends Utils {
   getElements(parent) {
     return Array.from(this.getDomElement(this.selector, true, parent))
   }
-  renderElement(element, parent, position = 'beforeend') {
+  renderToElement(element, parent = this.element, position = 'beforeend') {
     parent.insertAdjacentHTML(position, element)
   }
+  // renderToElement() {}
 }

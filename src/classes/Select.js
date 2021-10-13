@@ -18,7 +18,7 @@ export class Select extends Element { //////////////////////////////////////////
     const id = `select${this.index}`
     const castomSelect = `<form class="select__options-list" id="${id}" name="${name}" action="#"></form>`
 
-    this.renderElement(castomSelect, this.parent)
+    this.renderToElement(castomSelect, this.parent)
 
     const $currentSelect = this.getDomElement(`#${id}`)
 

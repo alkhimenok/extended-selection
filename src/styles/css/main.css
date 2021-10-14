@@ -261,8 +261,12 @@ h6 {
 /* option ----- */
 /* ----- select */
 .select .select__container {
-  width: 640px;
+  width: 660px;
   margin: 0 auto;
+}
+
+.select .select__body {
+  padding: 10px;
 }
 
 .select .select__header {

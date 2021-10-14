@@ -133,10 +133,13 @@
 		border-bottom: 1px solid $gray;
 	}
 	.select__options-list {
-		max-height: 420px;
+		height: 420px;
 		padding: 10px 0;
 		overflow-y: auto;
 		@include castomScrol;
+	}
+	.select__options-sublist {
+		overflow: hidden;
 	}
 	// .select__option {
 	// }

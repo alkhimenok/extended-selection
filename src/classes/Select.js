@@ -2,11 +2,13 @@ import { Element } from './Element.js';
 import { Option } from './Option.js';
 
 
-export class Select extends Element { ///////////////////////////////////////////
+export class Select extends Element {
   constructor(options) {
     super()
     this.select = options.select
-    this.parent = options.parent
+    this.$select = this.select.element
+    this.parentSelect = options.parentSelect
+    this.$parentSelect = this.parentSelect
     this.index = options.index
 
     this.remakeSelect()
@@ -14,32 +16,49 @@ export class Select extends Element { //////////////////////////////////////////
 
 
   remakeSelect() {
-    const { options, name } = this.select
-    const id = `select${this.index}`
-    const castomSelect = `<form class="select__options-list" id="${id}" name="${name}" action="#"></form>`
+    const { options, name } = this.$select
+    const selectId = `select${this.index}`
+    const castomSelect = `<form class="select__options-list" id="${selectId}" name="${name}" action="#"></form>`
 
-    this.renderToElement(castomSelect, this.parent)
+    this.parentSelect.renderToElement(castomSelect)
 
-    const $currentSelect = this.getDomElement(`#${id}`)
+    this.currentSelect = new Element(`#${selectId}`)
+    this.currentSelect.getElement()
 
-    Array.from(options).forEach(option => new Option({
-      option,
-      parent: $currentSelect,
-    }))
+    this.fillSelect(options)
 
-    this.checkedOption = this.checkedOption.bind(this)
-    $currentSelect.addEventListener('change', this.checkedOption)
-
-    this.select.remove()
+    this.select.removeElement()
   }
 
 
-  checkedOption(e) {
-    const checkboxInput = e.target
-    const checkbox = checkboxInput.closest('.checkbox')
-    const currentOption = checkboxInput.closest('.option')
+  fillSelect(options) { //////////////////////////////////////
+    const parents = { 1: this.currentSelect }
+    let prevLevel = 1
 
-    this.toggleClassName(checkbox, '_checked', checkboxInput.checked)
-    this.toggleClassName(currentOption, '_selected', checkboxInput.checked)
+    this.toArray(options)
+      .forEach(item => {
+        let { level } = item.dataset
+        level ??= 1
+
+        while (prevLevel > level) {
+          if (prevLevel < 0) break
+          delete parents[prevLevel]
+          --prevLevel
+        }
+
+        if (!parents[level]) {
+          const newParent = new Element('div')
+          newParent.createElement('', 'select__options-sublist')
+          newParent.renderElement(parents[prevLevel].element, 'beforeend')
+
+          prevLevel = level
+          parents[level] = newParent
+        }
+
+        const option = new Element(item)
+        option.getElement()
+
+        new Option({ option, select: this.currentSelect, parent: parents[level] })
+      })
   }
 }

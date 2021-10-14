@@ -26,6 +26,11 @@ $delay: all 0.2s ease-in-out;
   }
 }
 
+._hide {
+  opacity: 0;
+  transition: $delay;
+}
+
 /* ----- fonts */
 @import "./fonts";
 /* fonts ----- */

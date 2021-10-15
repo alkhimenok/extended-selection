@@ -195,7 +195,6 @@ h6 {
 /* ----- checkbox */
 .checkbox {
   position: relative;
-  display: block;
   min-width: 18px;
   min-height: 18px;
   cursor: pointer;
@@ -348,8 +347,8 @@ h6 {
   font-weight: 600;
   line-height: 22px;
   overflow: hidden;
-  -webkit-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .select .select__title::before, .select .select__title::after {
@@ -358,8 +357,8 @@ h6 {
   left: -30px;
   top: 50%;
   background-color: #000;
-  -webkit-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .select .select__title::before {
@@ -405,8 +404,8 @@ h6 {
   color: #035b77;
   background-color: transparent;
   opacity: 0;
-  -webkit-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -440,11 +439,11 @@ h6 {
   height: 90%;
   background-color: #035b77;
   border-radius: 10px;
-  -webkit-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.select .select__input {
+.select .select__input_search {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -466,13 +465,13 @@ h6 {
 }
 
 @media screen and (hover: hover) {
-  .select .select__input:hover {
+  .select .select__input_search:hover {
     color: #272526;
     background-color: #035b7710;
   }
 }
 
-.select .select__input:active {
+.select .select__input_search:active {
   color: #272526;
   background-color: #035b7710;
 }
@@ -493,8 +492,8 @@ h6 {
           flex-direction: column;
   height: 0px;
   overflow: hidden;
-  -webkit-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -564,6 +563,10 @@ h6 {
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 @media screen and (hover: hover) {
@@ -587,6 +590,10 @@ h6 {
   background-color: transparent;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 @media screen and (hover: hover) {
@@ -601,10 +608,6 @@ h6 {
 
 .select._there-are-selected .select__btn_show-selected {
   opacity: 1;
-  -webkit-user-select: all;
-     -moz-user-select: all;
-      -ms-user-select: all;
-          user-select: all;
   pointer-events: all;
 }
 
@@ -613,8 +616,13 @@ h6 {
           transform: translate(0, -50%) scale(1);
 }
 
-.select._there-are-selected .select__selected-options .select__input {
+.select._there-are-selected .select__selected-options .select__input_search {
   color: #272526;
+}
+
+.select._show-options .select__btn_show-selected {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .select._show-options .select__header {
@@ -630,8 +638,12 @@ h6 {
   left: 4px;
 }
 
-.select._show-options .select__selected-options .select__input {
+.select._show-options .select__selected-options .select__input_search {
   color: #272526;
+}
+
+.select._show-options .select__selected-options .select__input_search._hide-text {
+  color: rgba(255, 0, 0, 0);
 }
 
 .select._show-options .select__content {
@@ -665,13 +677,24 @@ h6 {
   overflow-x: hidden;
 }
 
-._hide {
-  opacity: 0;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
 ._none {
   display: none;
+}
+
+._hide {
+  opacity: 0;
+}
+
+._hide-text {
+  color: rgba(255, 0, 0, 0);
+}
+
+._highlight {
+  background-color: #ff240020;
+}
+
+._delay {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 /*# sourceMappingURL=main.css.map */

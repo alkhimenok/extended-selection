@@ -1,5 +1,5 @@
 $red: #ff2400;
-$transparateRed: #ff240010;
+$transparateRed: #ff240020;
 $dark: #484545;
 $blaсk: #272526;
 $transparateblaсk: #27252660;
@@ -8,7 +8,7 @@ $transparateGray: #fafafa;
 $blue: #035b77;
 $transparateBlue: #035b7710;
 $delay: all 0.2s ease-in-out;
-$longDelay: all 0.6s ease-in-out;
+$longDelay: all 0.5s ease-in-out;
 
 @mixin castomScrol {
   &::-webkit-scrollbar {
@@ -65,10 +65,18 @@ $longDelay: all 0.6s ease-in-out;
   overflow-x: hidden;
 }
 
-._hide {
-  opacity: 0;
-  transition: $delay;
-}
 ._none {
   display: none;
+}
+._hide {
+  opacity: 0;
+}
+._hide-text {
+  color: rgba(255, 0, 0, 0);
+}
+._highlight {
+  background-color: $transparateRed;
+}
+._delay {
+  transition: $delay;
 }

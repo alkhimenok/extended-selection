@@ -9,6 +9,7 @@ export class Option extends Element { //////////////////////////////////////////
     this.select = options.select
     this.$select = this.select.element
     this.parent = options.parent
+    this.selectId = options.index
 
     this.remakeOption()
   }
@@ -16,10 +17,10 @@ export class Option extends Element { //////////////////////////////////////////
 
   remakeOption() {
     const { value, textContent, dataset } = this.$option
-    const optionId = `option${value}`
+    const optionId = `option${value}-${this.selectId}`
     const level = +dataset.level || 1
     const castomOption = `
-      <fieldset class="select__option option" id="${optionId}" name="${optionId}" data-level="${level}">
+      <fieldset class="select__option option" id="${optionId}" name="${optionId}" data-value="${value}" data-level="${level}">
         <label class="option__label">
           <label class="option__checkbox checkbox">
             <input class="checkbox__input" type="checkbox">
@@ -60,17 +61,17 @@ export class Option extends Element { //////////////////////////////////////////
     this.$optionArrow.style.left = `${40 + 15 * level}px`
   }
 
-
+  
   addHandlerOption() {
-    this.selectedOption = this.selectedOption.bind(this)
-    this.$currentOption.addEventListener('change', this.selectedOption)
+    this.chooseOption = this.chooseOption.bind(this)
+    this.$currentOption.addEventListener('change', this.chooseOption)
 
     this.showSubList = this.showSubList.bind(this)
     this.$optionArrow.addEventListener('click', this.showSubList)
   }
 
 
-  selectedOption(e) {
+  chooseOption(e) {
     const inputCheckbox = e.target
 
     this.toggleClassName(this.$castomCheckbox, '_checked', inputCheckbox.checked)

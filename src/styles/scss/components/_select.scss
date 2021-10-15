@@ -23,7 +23,7 @@
 		font-weight: 600;
 		line-height: 22px;
 		overflow: hidden;
-		transition: $longDelay;
+		transition: $delay;
 		&::before,
 		&::after {
 			content: "";
@@ -31,7 +31,7 @@
 			left: -30px;
 			top: 50%;
 			background-color: #000;
-			transition: $longDelay;
+			transition: $delay;
 		}
 		&::before {
 			transform: translate(0, -50%) rotate(-45deg);
@@ -74,7 +74,7 @@
 		color: $blue;
 		background-color: transparent;
 		opacity: 0;
-		transition: $longDelay;
+		transition: $delay;
 		user-select: none;
 		pointer-events: none;
 		@media screen and (hover: hover) {
@@ -99,10 +99,10 @@
 			height: 90%;
 			background-color: $blue;
 			border-radius: 10px;
-			transition: $longDelay;
+			transition: $delay
 		}
 	}
-	.select__input {
+	.select__input_search {
 		width: 100%;
 		padding: 10px;
 		font-size: 16px;
@@ -175,6 +175,7 @@
 		border: 2px solid transparent;
 		border-radius: 4px;
 		transition: $delay;
+		user-select: none;
 		@media screen and (hover: hover) {
 			&:hover {
 				color: $blue;
@@ -194,6 +195,7 @@
 		color: $transparateblaсk;
 		background-color: transparent;
 		transition: $delay;
+		user-select: none;
 		@media screen and (hover: hover) {
 			&:hover {
 				color: $red;
@@ -206,19 +208,22 @@
 	&._there-are-selected {
 		.select__btn_show-selected {
 			opacity: 1;
-			user-select: all;
 			pointer-events: all;
 		}
 		.select__selected-options {
 			&::before {
 				transform: translate(0, -50%) scale(1);
 			}
-			.select__input {
+			.select__input_search {
 				color: $blaсk;
 			}
 		}
 	}
 	&._show-options {
+		.select__btn_show-selected {
+			opacity: 0;
+			pointer-events: none;
+		}
 		.select__header {
 			background-color: $transparateGray;
 		}
@@ -231,8 +236,11 @@
 			}
 		}
 		.select__selected-options {
-			.select__input {
+			.select__input_search {
 				color: $blaсk;
+				&._hide-text {
+					color: rgba(255, 0, 0, 0);
+				}
 			}
 		}
 		.select__content {

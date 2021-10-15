@@ -75,6 +75,7 @@ export class Select extends Element {
 
   shearchOption(e) {///////////////////////////////////////
     this.#showSublist()
+    this.setHeight()
 
     const { target } = e
     const { value } = target
@@ -104,6 +105,16 @@ export class Select extends Element {
     })
   }
 
+  setHeight() { ///////////////////////////////////////////...............................................................
+    const $lines = this.getDomElement('.arrow__vertical-line', true)
+
+    $lines.forEach(line => {
+      if (line.closest('.option').nextElementSibling?.classList.contains('select__options-sublist')) {
+        const o = line.closest('.option').nextElementSibling
+        line.style.height = `${o.clientHeight}px`
+      }
+    })
+  }
 
   #resetSearch() { /////////////////////////////////
     this.optionList.forEach(option => {

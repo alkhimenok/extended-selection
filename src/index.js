@@ -12,23 +12,25 @@ const markup = `
               Тендеры в роли Поставщика
             </h2>
             <a class="select__btn_show-selected" href="#">
-              Показать выбранное (10)
+              Показать выбранное (<span class="select__count-selected">10</span>)
             </a>
           </section>
           <section class="select__selected-options">
             <input class="select__input" type="text" disabled value="Код ОКРБ или наименование закупаемой продукции">
           </section>
         </section>
-        <section class="select__main">
-        </section>
-        <section class="select__footer">
-          <button class="select__btn_to-apply">
-            применить
-          </button>
-          <button class="select__btn_clear">
-            Очистить
-          </button>
-        </section>
+        <div class="select__content">
+          <section class="select__main">
+          </section>
+          <section class="select__footer">
+            <button class="select__btn_accept">
+              применить
+            </button>
+            <button class="select__btn_clear">
+              Очистить
+            </button>
+          </section>
+        </div>
       </div>
     </div>
   </div>
@@ -39,13 +41,14 @@ body.getElement()
 
 const wrapper = new Element('div')
 wrapper.createElement('', 'wrapper')
-wrapper.renderElement(body.element)
+wrapper.renderElement(body.element, 'afterbegin')
 
 const selects = new Element('select')
 selects.getElements()
 selects.element
+  .reverse()
   .forEach((element, index) => {
-    wrapper.renderToElement(markup)
+    wrapper.renderToElement(markup, 'afterbegin')
 
     const parentSelect = new Element('.select__main')
     parentSelect.getElement()

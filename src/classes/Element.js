@@ -32,7 +32,7 @@ export class Element extends Utils {
   renderElement(parent, position) {
     this.#checkRender(this.element, parent, position)
   }
-  renderToElement(element, position, parent) {
+  renderToElement(element, position) {
     if (this.#isElementArray()) {
       this.element.forEach((parent, i) => {
         if (Array.isArray(element)) {
@@ -63,7 +63,7 @@ export class Element extends Utils {
       return false
     }
   }
-  #checkRender(element, parent, position = 'afterbegin') {
+  #checkRender(element, parent, position = 'beforeend') {
     if (!element) return
     if (typeof element === 'string') {
       parent.insertAdjacentHTML(position, element)

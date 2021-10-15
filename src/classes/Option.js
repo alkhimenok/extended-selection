@@ -11,7 +11,6 @@ export class Option extends Element { //////////////////////////////////////////
     this.parent = options.parent
 
     this.remakeOption()
-    this.hideSubList()
   }
 
 
@@ -30,13 +29,14 @@ export class Option extends Element { //////////////////////////////////////////
           </span>
         </label>
         <div class="option__arrow arrow">
+          <span class="arrow__close"></span>
           <span class="arrow__icon"></span>
           <span class="arrow__vertical-line"></span>
         </div>
       </fieldset>
       `
 
-    this.parent.renderToElement(castomOption, 'beforeend')
+    this.parent.renderToElement(castomOption)
 
     this.currentOption = new Element(`#${optionId}`)
     this.$currentOption = this.currentOption.getElement()
@@ -81,9 +81,12 @@ export class Option extends Element { //////////////////////////////////////////
   showSubList(e) { /////////////////////////////////////
     if (this.$currentOption.nextElementSibling?.classList.contains('select__options-sublist')) {
       this.$currentOption.nextElementSibling.classList.toggle('_none')
-      this.doClassList(this.$optionArrow, 'toggle', '_show-sub-list')
+      this.doClassList(this.$optionArrow, 'toggle', '_show-sublist')
 
       this.setHeight()
+    }
+    else {
+      e.target.classList.add('_no-sublist')
     }
   }
 
@@ -97,13 +100,5 @@ export class Option extends Element { //////////////////////////////////////////
         line.style.height = `${o.clientHeight}px`
       }
     })
-  }
-
-
-  hideSubList() { //////////////////////////////////////////
-    const subLists = new Element('.select__options-sublist')
-    const $subLists = subLists.getElements()
-
-    $subLists.forEach(subList => this.doClassList(subList, 'add', '_none'))
   }
 }

@@ -1,4 +1,5 @@
-$red: rgb(158, 69, 69);
+$red: #ff2400;
+$transparateRed: #ff240010;
 $dark: #484545;
 $blaсk: #272526;
 $transparateblaсk: #27252660;
@@ -7,6 +8,7 @@ $transparateGray: #fafafa;
 $blue: #035b77;
 $transparateBlue: #035b7710;
 $delay: all 0.2s ease-in-out;
+$longDelay: all 0.6s ease-in-out;
 
 @mixin castomScrol {
   &::-webkit-scrollbar {
@@ -24,14 +26,6 @@ $delay: all 0.2s ease-in-out;
   & > :last-child {
     margin-bottom: 0;
   }
-}
-
-._hide {
-  opacity: 0;
-  transition: $delay;
-}
-._none {
-  display: none;
 }
 
 /* ----- fonts */
@@ -58,7 +52,9 @@ $delay: all 0.2s ease-in-out;
 @import "./components/select";
 /* select ----- */
 
+
 .wrapper {
+  background-color: $dark;
   max-width: 100vw;
   min-height: 100vh;
   display: flex;
@@ -67,4 +63,12 @@ $delay: all 0.2s ease-in-out;
   flex-direction: column;
   font-family: "Source Sans Pro", sans-serif;
   overflow-x: hidden;
+}
+
+._hide {
+  opacity: 0;
+  transition: $delay;
+}
+._none {
+  display: none;
 }

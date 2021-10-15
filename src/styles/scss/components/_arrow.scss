@@ -1,13 +1,45 @@
 .arrow {
   position: relative;
+  z-index: 1;
   width: 15px;
   height: 15px;
   background-color: transparent;
   cursor: pointer;
+  .arrow__close {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-60%, -60%);
+    z-index: 3;
+    width: 50%;
+    height: 50%;
+    opacity: 0;
+    transition: $delay;
+    user-select: none;
+    pointer-events: none;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: 120%;
+      height: 1.5px;
+      background-color: $red;
+      border-radius: 4px;
+    }
+    &::before {
+      transform: rotate(-45deg);
+    }
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
   .arrow__icon {
     position: absolute;
     top: 50%;
     left: 50%;
+    z-index: 2;
     transform: translate(-50%, -80%) rotate(135deg);
     width: 50%;
     height: 50%;
@@ -25,7 +57,7 @@
     transform: translate(-50%, 0);
     height: 0;
     border-left: 2px dashed $gray;
-    transition: $delay;
+    // transition: $delay;
   }
   @media screen and (hover: hover) {
     &:hover {
@@ -41,7 +73,15 @@
       border-right: 2px solid $dark;
     }
   }
-  &._show-sub-list {
+  &._no-sublist {
+    .arrow__icon {
+      opacity: 0;
+    }
+    .arrow__close {
+      opacity: 1;
+    }
+  }
+  &._show-sublist {
     .arrow__icon {
       transform: translate(-50%, -30%) rotate(-45deg);
     }

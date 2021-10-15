@@ -1,13 +1,13 @@
 .select {
+	padding: 10px;
 	.select__container {
-		width: 660px;
+		width: 640px;
 		margin: 0 auto;
 	}
 	.select__body {
-		padding: 10px;
+		background-color: #fff;
 	}
 	.select__header {
-		background-color: $transparateGray;
 		padding: 18px 20px;
 		@include removeLastMb;
 	}
@@ -23,15 +23,15 @@
 		font-weight: 600;
 		line-height: 22px;
 		overflow: hidden;
-		transition: $delay;
+		transition: $longDelay;
 		&::before,
 		&::after {
 			content: "";
 			position: absolute;
-			left: -100%;
+			left: -30px;
 			top: 50%;
 			background-color: #000;
-			transition: $delay;
+			transition: $longDelay;
 		}
 		&::before {
 			transform: translate(0, -50%) rotate(-45deg);
@@ -74,7 +74,7 @@
 		color: $blue;
 		background-color: transparent;
 		opacity: 0;
-		transition: $delay;
+		transition: $longDelay;
 		user-select: none;
 		pointer-events: none;
 		@media screen and (hover: hover) {
@@ -99,7 +99,7 @@
 			height: 90%;
 			background-color: $blue;
 			border-radius: 10px;
-			transition: $delay;
+			transition: $longDelay;
 		}
 	}
 	.select__input {
@@ -128,12 +128,27 @@
 			background-color: $transparateBlue;
 		}
 	}
+	.select__content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-direction: column;
+		height: 0px;
+		overflow: hidden;
+		transition: $longDelay;
+		user-select: none;
+		pointer-events: none;
+		> *  {
+			width: 100%;
+		}
+	}
 	.select__main {
+		flex: auto;
 		border-top: 1px solid $gray;
 		border-bottom: 1px solid $gray;
 	}
 	.select__options-list {
-		height: 420px;
+		max-height: 415px; /////
 		padding: 10px 0;
 		overflow-y: auto;
 		@include castomScrol;
@@ -144,13 +159,14 @@
 	// .select__option {
 	// }
 	.select__footer {
+		flex: 0 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: 10px 20px;
 		background-color: $transparateGray;
 	}
-	.select__btn_to-apply {
+	.select__btn_accept {
 		font-weight: 700;
 		text-transform: uppercase;
 		color: #fff;
@@ -203,7 +219,7 @@
 		}
 	}
 	&._show-options {
-		.select__body {
+		.select__header {
 			background-color: $transparateGray;
 		}
 		.select__title {
@@ -218,6 +234,11 @@
 			.select__input {
 				color: $blaсk;
 			}
+		}
+		.select__content {
+			height: 480px;
+			user-select: all;
+			pointer-events: all;
 		}
 	}
 }

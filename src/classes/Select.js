@@ -273,7 +273,6 @@ export class Select extends Element {
     $lines.forEach(line => {
       if (line.closest('.option').nextElementSibling?.classList.contains('select__options-sublist')) {
         const o = line.closest('.option').nextElementSibling
-        console.log(o.clientHeight);
         line.style.height = `${o.clientHeight}px`
       }
     })

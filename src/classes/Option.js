@@ -72,6 +72,7 @@ export class Option extends Element { //////////////////////////////////////////
 
 
   chooseOption(e) {
+    e.preventDefault()
     const inputCheckbox = e.target
 
     this.toggleClassName(this.$castomCheckbox, '_checked', inputCheckbox.checked)

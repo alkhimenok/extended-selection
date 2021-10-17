@@ -32,7 +32,7 @@ export class Element extends Utils {
 
     if (!duration) {
       this.doClassList(this.element, 'add', '_delay')
-      setTimeout(() => this.doClassList(this.element, 'remove', '_delay'), 2000)
+      setTimeout(() => this.doClassList(this.element, 'remove', '_delay'), delay * 3)
     }
     if (type === 'value') {
       this.doClassList(this.element, 'add', '_hide-text')
@@ -51,6 +51,10 @@ export class Element extends Utils {
       }, delay)
     }
   }
+
+  // #getDelay() {
+  //   return parseFloat(window.getComputedStyle(this.element).transitionDuration) * 1000 || 200
+  // }
 
 
   removeElement() {
@@ -72,14 +76,13 @@ export class Element extends Utils {
   renderToElement(element, position) {
     if (this.#isElementArray()) {
       this.element.forEach((parent, i) => {
-        if (this.toArray(element)) {
+        if (this.toArray(element).length) {
           if (element[i] === undefined) return
           this.#checkRender(element[i], parent, position)
         } else {
           if (typeof element === 'object') {
             element = element.cloneNode(true)
           }
-
           this.#checkRender(element, parent, position)
         }
       })

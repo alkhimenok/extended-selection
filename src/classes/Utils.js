@@ -8,7 +8,7 @@ export class Utils {
   }
   doClassList(selector, type, classes) {
     const element = this.getDomElement(selector)
-    const names = this.#checkClassNames(classes)
+    const names = this.toArray(classes)
 
     for (const name of names) {
       if (type === 'remove') {
@@ -38,9 +38,5 @@ export class Utils {
   }
   toArray(element, pause = ' ') {
     return typeof element === 'string' ? element.split(pause) : Array.from(element)
-  }
-  #checkClassNames(classes) {
-    if (!classes) return ''
-    return Array.isArray(classes) ? classes : classes.split(' ')
   }
 }

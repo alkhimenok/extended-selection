@@ -11,6 +11,7 @@ export class Select extends Element {
 
     this.$redoneSelect = this.redoneSelect.element
     this.$parentSelect = this.parentSelect.element
+
     this.selectId = `select${this.index}`
 
     this.remakeSelect()
@@ -33,7 +34,7 @@ export class Select extends Element {
                 </a>
               </section>
               <section class="select__selected-options">
-                <input class="select__input_search" type="search" disabled value="Код ОКРБ или наименование закупаемой продукции">
+                <input class="select__input_search" type="search" disabled value="Код ОКРБ или наименование закупаемой продукции" placeholder="Поиск">
               </section>
             </section>
             <div class="select__content">
@@ -64,6 +65,78 @@ export class Select extends Element {
   }
 
 
+  setSelectComponents() {
+    this.select = new Element(`#${this.selectId}`)
+    this.$select = this.select.getElement()
+
+    this.titleSelect = new Element('.select__title')
+    this.$titleSelect = this.titleSelect.getElement(this.$select)
+
+    this.btnShowSelected = new Element('.select__btn_show-selected')
+    this.$btnShowSelected = this.btnShowSelected.getElement(this.$select)
+
+    this.countOptionsSelected = new Element('.select__count-selected')
+    this.$countOptionsSelected = this.countOptionsSelected.getElement(this.$select)
+
+    this.inputSearch = new Element('.select__input_search')
+    this.$inputSearch = this.inputSearch.getElement(this.$select)
+
+    this.formSelect = new Element('form')
+    this.$formSelect = this.formSelect.getElement(this.$select)
+
+    this.btnAccept = new Element('.select__btn_accept')
+    this.$btnAccept = this.btnAccept.getElement(this.$select)
+
+    this.btnClear = new Element('.select__btn_clear')
+    this.$btnClear = this.btnClear.getElement(this.$select)
+
+    this.sublists = []
+
+    this.optionList = []
+
+    this.selectedOption = []
+
+    this.arrows = []
+
+    this.mainOptionText = ''
+  }
+
+
+  fillSelect(options) {///////////////////////////////////////////...............................................................
+    const parents = { 1: this.formSelect }
+    let prevLevel = 1
+
+    this.toArray(options)
+      .forEach(item => {
+        let level = item.dataset.level ?? 1
+
+        while (prevLevel > level && prevLevel > 0) {
+          delete parents[prevLevel]
+          --prevLevel
+        }
+
+        if (!parents[level]) {
+          const currentSublist = this.#createSublist(parents[prevLevel].element)
+
+          this.sublists.push(currentSublist.element)
+
+          parents[level] = currentSublist
+          prevLevel = level
+        }
+
+        const option = new Element(item)
+        option.getElement()
+
+        const exemplar = new Option({ option, select: this.formSelect, parent: parents[level], index: this.index })
+
+        this.optionList.push(exemplar.currentOption.element)
+      })
+
+    // this.#setHeight()
+    this.#hideSubList()
+  }
+
+
   addSelectHandlers() {
     this.checkTarget = this.#checkTarget.bind(this)
     this.$select.addEventListener('click', this.checkTarget)
@@ -73,9 +146,61 @@ export class Select extends Element {
   }
 
 
-  shearchOption(e) {///////////////////////////////////////
+  showOptions() {
+    if (this.$inputSearch.disabled) {
+      this.doClassList(this.$select, 'add', '_show-options')
+
+      this.titleSelect.remakeContent('Реализуемые товары')
+      this.inputSearch.remakeContent('Поиск', 'value')
+
+      this.$inputSearch.disabled = false
+    }
+  }
+
+
+  hideOptions() {
+    this.doClassList(this.$select, 'remove', '_show-options')
+
+    if (this.doClassList(this.$select, 'contains', '_there-are-selected')) {
+      this.titleSelect.remakeContent('Тендеры в роли Заказчика')
+      this.inputSearch.remakeContent(this.mainOptionText, 'value')
+    } else {
+      this.titleSelect.remakeContent('Тендеры в роли Поставщика')
+      this.inputSearch.remakeContent('Код ОКРБ или наименование закупаемой продукции', 'value')
+    }
+
+    this.$inputSearch.disabled = true
+  }
+
+
+  acceptSelectedOptions() {
+    this.#setMainOption()
+    this.#saveAcceptedOptions()
+
+    this.$countOptionsSelected.textContent = this.selectedOption.length
+
+    this.hideOptions()
+
+    console.log(this.selectedOption);
+    return this.selectedOption
+  }
+
+
+  clearSelectedOptions() { ///////////////////////////////////////////...............................................................
+    this.#setMainOption()
+
+    this.selectedOption
+      .forEach(option => {
+        this.getDomElement('.checkbox__input', false, option).click()
+      })
+
+    this.#setMainOption()
+    this.#saveAcceptedOptions()
+  }
+
+
+  shearchOption(e) { ///////////////////////////////////////////...............................................................
     this.#showSublist()
-    this.setHeight()
 
     const { target } = e
     const { value } = target
@@ -103,108 +228,8 @@ export class Select extends Element {
         this.doClassList(option, 'add', '_none')
       }
     })
-  }
 
-  setHeight() { ///////////////////////////////////////////...............................................................
-    const $lines = this.getDomElement('.arrow__vertical-line', true)
-
-    $lines.forEach(line => {
-      if (line.closest('.option').nextElementSibling?.classList.contains('select__options-sublist')) {
-        const o = line.closest('.option').nextElementSibling
-        line.style.height = `${o.clientHeight}px`
-      }
-    })
-  }
-
-  #resetSearch() { /////////////////////////////////
-    this.optionList.forEach(option => {
-      this.doClassList(option, 'remove', '_none')
-      const optionText = new Element('.option__text').getElement(option)
-      optionText.innerHTML = option.textContent.trim()
-    })
-  }
-
-
-  showOptions() { ///////////////////////////////////////
-    if (this.$inputSearch.disabled) {
-      this.doClassList(this.$select, 'add', '_show-options')
-      this.titleSelect.remakeContent('Реализуемые товары')
-
-      this.$inputSearch.disabled = false
-      this.inputSearch.remakeContent('Поиск', 'value')
-    }
-  }
-
-
-  hideOptions() { ///////////////////////////////////////
-    this.doClassList(this.$select, 'remove', '_show-options')
-
-    if (this.doClassList(this.$select, 'contains', '_there-are-selected')) {
-      this.titleSelect.remakeContent('Тендеры в роли Заказчика')
-    } else {
-      this.titleSelect.remakeContent('Тендеры в роли Поставщика')
-    }
-
-    this.$inputSearch.disabled = true
-    this.inputSearch.remakeContent(this.mainOptionText || 'Код ОКРБ или наименование закупаемой продукции', 'value')
-  }
-
-
-  acceptSelectedOptions() {
-    this.#setMainOption()
-    this.#saveAcceptedOptions()
-    
-    this.$countOptionsSelected.textContent = this.selectedOption.length
-    
-    this.hideOptions()
-
-    return this.selectedOption
-  }
-
-
-  clearSelectedOptions() {
-    this.#setMainOption()
-
-    this.selectedOption
-      .forEach(option => {
-        this.getDomElement('.checkbox__input', false, option).click()
-      })
-
-    this.#setMainOption()
-    this.#saveAcceptedOptions()
-  }
-
-
-  setSelectComponents() {
-    this.select = new Element(`#${this.selectId}`)
-    this.$select = this.select.getElement()
-
-    this.titleSelect = new Element('.select__title')
-    this.$titleSelect = this.titleSelect.getElement(this.$select)
-
-    this.btnShowSelected = new Element('.select__btn_show-selected')
-    this.$btnShowSelected = this.btnShowSelected.getElement(this.$select)
-
-    this.countOptionsSelected = new Element('.select__count-selected')
-    this.$countOptionsSelected = this.countOptionsSelected.getElement(this.$select)
-
-    this.inputSearch = new Element('.select__input_search')
-    this.$inputSearch = this.inputSearch.getElement(this.$select)
-
-    this.formSelect = new Element('form')
-    this.$formSelect = this.formSelect.getElement(this.$select)
-
-    this.btnAccept = new Element('.select__btn_accept')
-    this.$btnAccept = this.btnAccept.getElement(this.$select)
-
-    this.btnClear = new Element('.select__btn_clear')
-    this.$btnClear = this.btnClear.getElement(this.$select)
-
-    this.optionList = []
-
-    this.selectedOption = []
-
-    this.mainOptionText = ''
+    this.setHeight()
   }
 
 
@@ -233,14 +258,37 @@ export class Select extends Element {
   }
 
 
-  #saveAcceptedOptions() {
-    this.toggleClassName(this.$select, '_there-are-selected', this.selectedOption.length)
-    this.#resetSearch()
+  #createSublist(parent) {
+    const sublist = new Element('div')
+    sublist.createElement('', 'select__options-sublist')
+    sublist.renderElement(parent)
+
+    return sublist
   }
 
 
-  #getselectedOption() {
-    return this.optionList.filter(option => this.doClassList(option, 'contains', '_selected'))
+  setHeight() { ///////////////////////////////////////////
+    const $lines = this.getDomElement('.arrow__vertical-line', true)
+
+    $lines.forEach(line => {
+      if (line.closest('.option').nextElementSibling?.classList.contains('select__options-sublist')) {
+        const o = line.closest('.option').nextElementSibling
+        console.log(o.clientHeight);
+        line.style.height = `${o.clientHeight}px`
+      }
+    })
+  }
+
+
+  #hideSubList() { ///////////////////////////////////////////...............................................................
+    this.sublists.forEach(subList => this.doClassList(subList, 'add', '_none'))
+  }
+
+
+  #showSublist() { ///////////////////////////////////////////...............................................................
+    this.sublists.forEach(subList => {
+      this.doClassList(subList, 'remove', '_none')
+    })
   }
 
 
@@ -262,76 +310,42 @@ export class Select extends Element {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  fillSelect(options) { ///////////////////////////////////////
-    const parents = { 1: this.formSelect }
-    let prevLevel = 1
-
-    this.toArray(options)
-      .forEach(item => {
-        let { level } = item.dataset
-        level ??= 1
-
-        while (prevLevel > level) {
-          if (prevLevel < 0) break
-          delete parents[prevLevel]
-          --prevLevel
-        }
-
-        if (!parents[level]) {
-          const newParent = new Element('div')
-          newParent.createElement('', 'select__options-sublist')
-          newParent.renderElement(parents[prevLevel].element)
-
-          prevLevel = level
-          parents[level] = newParent
-        }
-
-        const option = new Element(item)
-        option.getElement()
-
-        new Option({ option, select: this.formSelect, parent: parents[level], index: this.index })
-      })
-
-    this.optionList = new Element('.option').getElements(this.$formSelect)
-
-    this.#hideSubList()
+  #getselectedOption() {
+    return this.filterOnClassName(this.optionList, '_selected')
   }
 
 
-  #hideSubList() { //////////////////////////////////////////
-    const subLists = new Element('.select__options-sublist')
-    const $subLists = subLists.getElements()
-
-    $subLists.forEach(subList => this.doClassList(subList, 'add', '_none'))
+  #saveAcceptedOptions() {
+    this.#resetSearch()
+    this.toggleClassName(this.$select, '_there-are-selected', this.selectedOption.length)
   }
-  #showSublist() { //////////////////////////////////////////
-    const subLists = new Element('.select__options-sublist')
-    const $subLists = subLists.getElements()
 
-    $subLists.forEach(subList => this.doClassList(subList, 'remove', '_none'))
+
+  #resetSearch() { ///////////////////////////////////////////...............................................................
+    this.optionList.forEach(option => {
+      const optionText = new Element('.option__text').getElement(option)
+
+      this.doClassList(option, 'remove', '_none')
+
+      optionText.textContent = option.textContent.trim()
+    })
   }
 }
+// #setHeight() { ///////////////////////////////////////////...............................................................
+  //   this.sublists.forEach(sublist => {
+  //     const arrow = new Element('.arrow')
+  //     const $arrow = arrow.getElement(sublist.previousElementSibling)
+      
+  //     this.arrows.push($arrow)
+
+  //     $arrow.dataset.height = window.getComputedStyle(sublist).height
+  //   })
+  // }
+
+    // setHeight() { ///////////////////////////////////////////...............................................................
+  //   this.arrows.forEach(arrow => {
+  //     const line = arrow.querySelector('.arrow__vertical-line')
+  //     line.style.height = arrow.dataset.height
+  //     this.doClassList(arrow, 'toggle', '_show-sublist')
+  //   })
+  // }

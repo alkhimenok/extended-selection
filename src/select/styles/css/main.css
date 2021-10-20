@@ -537,22 +537,24 @@ h6 {
 }
 
 .select .select__options-list {
-  max-height: 415px;
   padding: 10px 0;
   overflow-y: auto;
 }
 
-.select .select__options-list::-webkit-scrollbar {
-  width: 4px !important;
-}
-
-.select .select__options-list::-webkit-scrollbar-track {
-  background-color: #d9d9d9;
-}
-
-.select .select__options-list::-webkit-scrollbar-thumb {
-  background: #035b77;
-  border-radius: 10px;
+@media screen and (min-width: 768px) {
+  .select .select__options-list {
+    max-height: 415px;
+  }
+  .select .select__options-list::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  .select .select__options-list::-webkit-scrollbar-track {
+    background-color: #d9d9d9;
+  }
+  .select .select__options-list::-webkit-scrollbar-thumb {
+    background: #035b77;
+    border-radius: 10px;
+  }
 }
 
 .select .select__options-sublist {
@@ -681,6 +683,17 @@ h6 {
 @media screen and (max-width: 768px) {
   .select._show-options .select__content {
     height: 350px;
+    overflow: auto;
+  }
+  .select._show-options .select__content::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  .select._show-options .select__content::-webkit-scrollbar-track {
+    background-color: #d9d9d9;
+  }
+  .select._show-options .select__content::-webkit-scrollbar-thumb {
+    background: #035b77;
+    border-radius: 10px;
   }
 }
 

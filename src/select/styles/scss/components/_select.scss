@@ -159,10 +159,12 @@
     border-bottom: 1px solid $gray;
   }
   .select__options-list {
-    max-height: 415px; // write script for auto height !!!
     padding: 10px 0;
     overflow-y: auto;
-    @include castomScrol;
+    @media screen and (min-width: 768px) {
+      max-height: 415px; // write script for auto height !!!
+      @include castomScrol;
+    }
   }
   .select__options-sublist {
     overflow: hidden;
@@ -260,6 +262,8 @@
       pointer-events: all;
       @media screen and (max-width: 768px) {
         height: 350px;
+        overflow: auto;
+      @include castomScrol;
       }
       @media screen and (max-width: 480px) {
         height: 300px;

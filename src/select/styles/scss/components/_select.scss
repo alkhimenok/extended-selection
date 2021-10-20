@@ -1,10 +1,11 @@
 .select {
   padding: 10px;
+  width: 100%; //////////
   .select__container {
     width: 640px;
     margin: 0 auto;
     @media screen and (max-width: 768px) {
-      width: 90%;
+      width: 90%; //////////
     }
   }
   .select__body {
@@ -112,7 +113,7 @@
       transition: $delay;
     }
   }
-  .select__input_search {
+  .select__input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -224,7 +225,7 @@
       &::before {
         transform: translate(0, -50%) scale(1);
       }
-      .select__input_search {
+      .select__input {
         color: $blaсk;
       }
     }
@@ -246,7 +247,7 @@
       }
     }
     .select__selected-options {
-      .select__input_search {
+      .select__input {
         color: $blaсk;
         &._hide-text {
           color: rgba(255, 0, 0, 0);

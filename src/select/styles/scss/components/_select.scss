@@ -1,0 +1,268 @@
+.select {
+  padding: 10px;
+  .select__container {
+    width: 640px;
+    margin: 0 auto;
+    @media screen and (max-width: 768px) {
+      width: 90%;
+    }
+  }
+  .select__body {
+    background-color: #fff;
+  }
+  .select__header {
+    padding: 18px 20px;
+    @include removeLastMb;
+  }
+  .select__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+  .select__title {
+    position: relative;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    overflow: hidden;
+    transition: $delay;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: 50%;
+      background-color: #000;
+      transition: $delay;
+    }
+    &::before {
+      transform: translate(0, -50%) rotate(-45deg);
+      width: 12px;
+      height: 12px;
+      background-color: transparent;
+      border-top: 2px solid #000;
+      border-left: 2px solid #000;
+    }
+    &::after {
+      transform: translate(0, -50%);
+      width: 15px;
+      height: 2px;
+    }
+    @media screen and (max-width: 768px) {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    @media screen and (hover: hover) {
+      &:hover {
+        &::before {
+          border-top: 2px solid $blue;
+          border-left: 2px solid $blue;
+        }
+        &::after {
+          background-color: $blue;
+        }
+      }
+    }
+    &:active {
+      &::before {
+        border-top: 2px solid $blue;
+        border-left: 2px solid $blue;
+      }
+      &::after {
+        background-color: $blue;
+      }
+    }
+  }
+  .select__btn_show-selected {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: $blue;
+    background-color: transparent;
+    opacity: 0;
+    transition: $delay;
+    user-select: none;
+    pointer-events: none;
+    @media screen and (hover: hover) {
+      &:hover {
+        color: $gray;
+      }
+    }
+    &:active {
+      color: $gray;
+    }
+  }
+  .select__selected-options {
+    position: relative;
+    width: 100%;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%) scale(0);
+      width: 2px;
+      height: 90%;
+      background-color: $blue;
+      border-radius: 10px;
+      transition: $delay;
+    }
+  }
+  .select__input_search {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: $transparateblaсk;
+    background-color: #fff;
+    border: 1px solid $gray;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: $delay;
+    user-select: none;
+    cursor: pointer;
+    @media screen and (hover: hover) {
+      &:hover {
+        color: $blaсk;
+        background-color: $transparateBlue;
+      }
+    }
+    &:active {
+      color: $blaсk;
+      background-color: $transparateBlue;
+    }
+  }
+  .select__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 0px;
+    overflow: hidden;
+    transition: $longDelay;
+    user-select: none;
+    pointer-events: none;
+    > * {
+      width: 100%;
+    }
+  }
+  .select__main {
+    flex: auto;
+    border-top: 1px solid $gray;
+    border-bottom: 1px solid $gray;
+  }
+  .select__options-list {
+    max-height: 415px; // write script for auto height !!!
+    padding: 10px 0;
+    overflow-y: auto;
+    @include castomScrol;
+  }
+  .select__options-sublist {
+    overflow: hidden;
+  }
+  // .select__option {
+  // }
+  .select__footer {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: $transparateGray;
+  }
+  .select__btn_accept {
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 11px 20px;
+    background-color: $blue;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: $delay;
+    user-select: none;
+    @media screen and (hover: hover) {
+      &:hover {
+        color: $blue;
+        background-color: $transparateGray;
+        border: 2px solid $blue;
+      }
+    }
+    &:active {
+      color: $blue;
+      background-color: $transparateGray;
+      border: 2px solid $blue;
+    }
+  }
+  .select__btn_clear {
+    font-weight: 600;
+    text-transform: capitalize;
+    color: $transparateblaсk;
+    background-color: transparent;
+    transition: $delay;
+    user-select: none;
+    @media screen and (hover: hover) {
+      &:hover {
+        color: $red;
+      }
+    }
+    &:active {
+      color: $red;
+    }
+  }
+  &._there-are-selected {
+    .select__btn_show-selected {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .select__selected-options {
+      &::before {
+        transform: translate(0, -50%) scale(1);
+      }
+      .select__input_search {
+        color: $blaсk;
+      }
+    }
+  }
+  &._show-options {
+    .select__btn_show-selected {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .select__header {
+      background-color: $transparateGray;
+    }
+    .select__title {
+      padding-left: 30px;
+      cursor: pointer;
+      &::before,
+      &::after {
+        left: 4px;
+      }
+    }
+    .select__selected-options {
+      .select__input_search {
+        color: $blaсk;
+        &._hide-text {
+          color: rgba(255, 0, 0, 0);
+        }
+      }
+    }
+    .select__content {
+      height: 480px;
+      user-select: all;
+      pointer-events: all;
+      @media screen and (max-width: 768px) {
+        height: 350px;
+      }
+      @media screen and (max-width: 480px) {
+        height: 300px;
+      }
+    }
+  }
+}

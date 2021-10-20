@@ -1,0 +1,26 @@
+{
+  "name": "extended-selection_component",
+  "version": "1.0.0",
+  "description": "OZiTAG Test Task \"Expanded Selection\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirill-leonidovich/extended-selection_component.git"
+  },
+  "author": "Alkhimenok Kirill <alkhimenok.kirill.leonidovich@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kirill-leonidovich/extended-selection_component/issues"
+  },
+  "homepage": "https://github.com/kirill-leonidovich/extended-selection_component#readme",
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1"
+  }
+}

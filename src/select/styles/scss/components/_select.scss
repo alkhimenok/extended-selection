@@ -1,11 +1,11 @@
 .select {
   padding: 10px;
-  width: 100%; //////////
+  transition: $delay;
   .select__container {
     width: 640px;
     margin: 0 auto;
     @media screen and (max-width: 768px) {
-      width: 90%; //////////
+      width: 90%;
     }
   }
   .select__body {
@@ -97,7 +97,9 @@
       color: $gray;
     }
   }
-  .select__selected-options {
+  // .select__count-selected {
+  // }
+  .select__selected-option {
     position: relative;
     width: 100%;
     &::before {
@@ -153,16 +155,14 @@
       width: 100%;
     }
   }
-  .select__main {
+  .select__options-list {
     flex: auto;
+    padding: 10px 0;
     border-top: 1px solid $gray;
     border-bottom: 1px solid $gray;
-  }
-  .select__options-list {
-    padding: 10px 0;
     overflow-y: auto;
     @media screen and (min-width: 768px) {
-      max-height: 415px; // write script for auto height !!!
+      max-height: 415px;
       @include castomScrol;
     }
   }
@@ -223,7 +223,7 @@
       opacity: 1;
       pointer-events: all;
     }
-    .select__selected-options {
+    .select__selected-option {
       &::before {
         transform: translate(0, -50%) scale(1);
       }
@@ -248,12 +248,9 @@
         left: 4px;
       }
     }
-    .select__selected-options {
+    .select__selected-option {
       .select__input {
         color: $blaсk;
-        &._hide-text {
-          color: rgba(255, 0, 0, 0);
-        }
       }
     }
     .select__content {
@@ -263,7 +260,7 @@
       @media screen and (max-width: 768px) {
         height: 350px;
         overflow: auto;
-      @include castomScrol;
+        @include castomScrol;
       }
       @media screen and (max-width: 480px) {
         height: 300px;

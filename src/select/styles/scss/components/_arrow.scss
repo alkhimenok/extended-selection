@@ -5,18 +5,21 @@
   height: 15px;
   background-color: transparent;
   cursor: pointer;
-  .arrow__close {
+  .arrow__close,
+  .arrow__icon {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-60%, -60%);
-    z-index: 3;
     width: 50%;
     height: 50%;
-    opacity: 0;
     transition: $delay;
-    user-select: none;
     pointer-events: none;
+  }
+  .arrow__close { 
+    transform: translate(-60%, -60%);
+    z-index: 3;
+    opacity: 0;
+    user-select: none;
     &::before,
     &::after {
       content: "";
@@ -36,19 +39,12 @@
     }
   }
   .arrow__icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     z-index: 2;
     transform: translate(-50%, -80%) rotate(135deg);
-    width: 50%;
-    height: 50%;
     background-color: transparent;
     border-radius: 0 1px 0 0;
     border-top: 2px solid #000;
     border-right: 2px solid #000;
-    transition: $delay;
-    pointer-events: none;
   }
   .arrow__vertical-line {
     position: absolute;

@@ -220,6 +220,8 @@ export class Select {
 		} else {
 			return
 		}
+		
+		e.preventDefault()
 	}
 
 	#setMainOption() {

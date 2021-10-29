@@ -28,7 +28,3 @@ selectList.forEach((initialSelect, index) => {
 	window[redoneSelect.idSelect] = redoneSelect // to be able to control the selection from the console
 })
 /* selection setting ----- */
-
-// window['select1'].$select.addEventListener('change', () => {
-// 	console.log('Hello')
-// })

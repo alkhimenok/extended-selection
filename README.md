@@ -2,10 +2,9 @@
 
 ## To start you can use `live server`
 
-<br>
 
-## [Demo](https://kirill-leonidovich.github.io/extended-selection/)
-## [Web-Desing](https://www.figma.com/file/3FSYu8zOYKeC5H48ne7y4W/OZiTAG-Frontend-Test-Task?node-id=1380%3A121545)
+### [Demo](https://kirill-leonidovich.github.io/extended-selection/)
+### [Web-Desing](https://www.figma.com/file/3FSYu8zOYKeC5H48ne7y4W/OZiTAG-Frontend-Test-Task?node-id=1380%3A121545)
 
 <br>
 

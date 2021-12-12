@@ -1,6 +1,7 @@
 # extended-selection
  
 **[Demo](https://alkhimenok.github.io/extended-selection/)**
+
 **[Web-Desing](https://www.figma.com/file/3FSYu8zOYKeC5H48ne7y4W/OZiTAG-Frontend-Test-Task?node-id=1380%3A121545)**
  
 ### Getting started

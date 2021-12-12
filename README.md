@@ -3,17 +3,18 @@
 ## To start you can use `live server`
 
 
-### [Demo](https://alkhimenok.github.io/extended-selection/)
-### [Web-Desing](https://www.figma.com/file/3FSYu8zOYKeC5H48ne7y4W/OZiTAG-Frontend-Test-Task?node-id=1380%3A121545)
+#### **[Demo](https://alkhimenok.github.io/extended-selection/)**
+#### **[Web-Desing](https://www.figma.com/file/3FSYu8zOYKeC5H48ne7y4W/OZiTAG-Frontend-Test-Task?node-id=1380%3A121545)**
 
 <br>
 
-## Techmical task
-
-> HTML code should have only one `<select>` tag and nested `<option>` tags,
-the rest is added in JS
+### Techmical task
+- Create an `extended selection`
 
 ### Nuances:
+- HTML code should have only one `<select>` tag and nested `<option>` tags,
+the rest is added in JS
+
 - It should be possible to preset the selected default values, via
 selected attribute on `<option>` tag
 

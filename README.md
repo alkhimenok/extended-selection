@@ -1,6 +1,6 @@
 ﻿# extended-selection
 
-## To start you can use `live server`
+### To start you can use `live server`
 
 
 #### **[Demo](https://alkhimenok.github.io/extended-selection/)**

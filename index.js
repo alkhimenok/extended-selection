@@ -4,7 +4,6 @@ import { Select } from './src/select/Select.js'
 const wrapper = document.createElement('div')
 wrapper.classList.add('wrapper')
 document.body.insertAdjacentElement('afterbegin', wrapper)
-/* for convenience ----- */
 
 /* ----- selection setting */
 const selectList = document.querySelectorAll('select') // searches all selections in a document
@@ -27,4 +26,3 @@ selectList.forEach((initialSelect, index) => {
 
 	window[redoneSelect.idSelect] = redoneSelect // to be able to control the selection from the console
 })
-/* selection setting ----- */
